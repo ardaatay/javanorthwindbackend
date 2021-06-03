@@ -14,6 +14,7 @@ import com.ardaatay.northwind.business.abstracts.ProductService;
 import com.ardaatay.northwind.core.utilities.results.DataResult;
 import com.ardaatay.northwind.core.utilities.results.Result;
 import com.ardaatay.northwind.entities.concretes.Product;
+import com.ardaatay.northwind.entities.dtos.ProductWithCategoryDto;
 
 @RestController
 @RequestMapping("/api/products")
@@ -39,7 +40,7 @@ public class ProductsController {
 	@GetMapping("/getallByPageAndSort")
 	public DataResult<List<Product>> getAllByPageAndSort(@RequestParam int pageNo, @RequestParam int pageSize,
 			@RequestParam String sortColumn) {
-		return this.productService.getAllSorted(pageNo, pageSize,sortColumn);
+		return this.productService.getAllSorted(pageNo, pageSize, sortColumn);
 	}
 
 	@PostMapping("/add")
@@ -67,5 +68,10 @@ public class ProductsController {
 	public DataResult<List<Product>> getByNameAndCategory(@RequestParam String productName,
 			@RequestParam int categoryId) {
 		return this.productService.getByNameAndCategoryId(productName, categoryId);
+	}
+
+	@GetMapping("/getProductWithCategoryDetails")
+	public DataResult<List<ProductWithCategoryDto>> getProductWithCategoryDetails() {
+		return this.productService.getProductWithCategoryDetails();
 	}
 }

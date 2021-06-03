@@ -15,6 +15,7 @@ import com.ardaatay.northwind.core.utilities.results.SuccessDataResult;
 import com.ardaatay.northwind.core.utilities.results.SuccessResult;
 import com.ardaatay.northwind.dataAccess.abstracts.ProductDao;
 import com.ardaatay.northwind.entities.concretes.Product;
+import com.ardaatay.northwind.entities.dtos.ProductWithCategoryDto;
 
 @Service
 public class ProductManager implements ProductService {
@@ -92,5 +93,11 @@ public class ProductManager implements ProductService {
 	public DataResult<List<Product>> getByNameAndCategoryId(String productName, int categoryId) {
 		return new SuccessDataResult<List<Product>>(this.productDao.getByNameAndCategory(productName, categoryId),
 				"Data listelendi.");
+	}
+
+	@Override
+	public DataResult<List<ProductWithCategoryDto>> getProductWithCategoryDetails() {
+		return new SuccessDataResult<List<ProductWithCategoryDto>>(this.productDao.getProductWithCategoryDetails(),
+				"Data Listelendi.");
 	}
 }

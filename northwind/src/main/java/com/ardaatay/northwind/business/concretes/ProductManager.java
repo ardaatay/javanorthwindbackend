@@ -28,7 +28,8 @@ public class ProductManager implements ProductService {
 
 	@Override
 	public DataResult<List<Product>> getAll() {
-		return new SuccessDataResult<List<Product>>(this.productDao.findAll(), "Data listelendi.");
+		Sort sort = Sort.by(Sort.Direction.ASC, "productName");
+		return new SuccessDataResult<List<Product>>(this.productDao.findAll(sort), "Data listelendi.");
 	}
 
 	@Override

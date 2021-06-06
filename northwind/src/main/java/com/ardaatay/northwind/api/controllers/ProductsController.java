@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ardaatay.northwind.business.abstracts.ProductService;
+import com.ardaatay.northwind.core.utilities.pagination.Pagination;
 import com.ardaatay.northwind.core.utilities.results.DataResult;
 import com.ardaatay.northwind.core.utilities.results.Result;
 import com.ardaatay.northwind.entities.concretes.Product;
@@ -35,7 +36,7 @@ public class ProductsController {
 	}
 
 	@GetMapping("/getallByPage")
-	public DataResult<List<Product>> getAllByPage(@RequestParam int pageNo, @RequestParam int pageSize) {
+	public DataResult<Pagination<List<Product>>> getAllByPage(@RequestParam int pageNo, @RequestParam int pageSize) {
 		return this.productService.getAll(pageNo, pageSize);
 	}
 

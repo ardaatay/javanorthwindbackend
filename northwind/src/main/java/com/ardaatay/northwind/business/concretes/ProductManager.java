@@ -9,6 +9,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.ardaatay.northwind.business.abstracts.ProductService;
+import com.ardaatay.northwind.core.utilities.pagination.Pagination;
 import com.ardaatay.northwind.core.utilities.results.DataResult;
 import com.ardaatay.northwind.core.utilities.results.Result;
 import com.ardaatay.northwind.core.utilities.results.SuccessDataResult;
@@ -34,10 +35,16 @@ public class ProductManager implements ProductService {
 	}
 
 	@Override
-	public DataResult<List<Product>> getAll(int pageNo, int pageSize) {
-		Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
+	public DataResult<Pagination<List<Product>>> getAll(int pageNo, int pageSize) {
+		Sort sort = Sort.by(Sort.Direction.ASC, "productName");
 
-		return new SuccessDataResult<List<Product>>(this.productDao.findAll(pageable).getContent());
+		Pageable pageable = PageRequest.of(pageNo - 1, pageSize, sort);
+
+		Pagination<List<Product>> pagination = new Pagination<List<Product>>();
+		pagination.setItems(this.productDao.findAll(pageable).getContent());
+		pagination.setTotalCount(this.productDao.count());
+
+		return new SuccessDataResult<Pagination<List<Product>>>(pagination);
 	}
 
 	@Override

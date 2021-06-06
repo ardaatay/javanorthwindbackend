@@ -2,6 +2,7 @@ package com.ardaatay.northwind.business.abstracts;
 
 import java.util.List;
 
+import com.ardaatay.northwind.core.utilities.pagination.Pagination;
 import com.ardaatay.northwind.core.utilities.results.DataResult;
 import com.ardaatay.northwind.core.utilities.results.Result;
 import com.ardaatay.northwind.entities.concretes.Product;
@@ -10,7 +11,7 @@ import com.ardaatay.northwind.entities.dtos.ProductWithCategoryDto;
 public interface ProductService {
 	DataResult<List<Product>> getAll();
 
-	DataResult<List<Product>> getAll(int pageNo, int pageSize);
+	DataResult<Pagination<List<Product>>> getAll(int pageNo, int pageSize);
 
 	DataResult<List<Product>> getAllSorted(int pageNo, int pageSize, String sortColumn);
 
@@ -29,7 +30,7 @@ public interface ProductService {
 	DataResult<List<Product>> getByProductNameStartsWith(String productName);
 
 	DataResult<List<Product>> getByNameAndCategoryId(String productName, int categoryId);
-	
+
 	DataResult<List<ProductWithCategoryDto>> getProductWithCategoryDetails();
 
 }

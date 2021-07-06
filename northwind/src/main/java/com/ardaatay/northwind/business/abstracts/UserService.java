@@ -8,5 +8,4 @@ public interface UserService {
 	Result add(User user);
 
 	DataResult<User> getByEmail(String email);
-
 }
